@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor Sign-Up</title>
+    <title>Vendor Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,22 +40,22 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #28a745;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
     <div class="form-container">
-        <h2>Vendor Sign-Up</h2>
-        <form id="signUpForm">
+        <h2>Vendor Login</h2>
+        <form id="loginForm">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -68,25 +68,30 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit">Login</button>
         </form>
     </div>
 
     <script>
-        document.getElementById('signUpForm').addEventListener('submit', function(event) {
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
 
-            // Store data in localStorage for now (just for testing)
-            localStorage.setItem('vendorEmail', email);
-            localStorage.setItem('vendorPhone', phone);
-            localStorage.setItem('vendorPassword', password);
+            // Fetch stored data from localStorage for authentication
+            const storedEmail = localStorage.getItem('vendorEmail');
+            const storedPhone = localStorage.getItem('vendorPhone');
+            const storedPassword = localStorage.getItem('vendorPassword');
 
-            alert('Sign-Up Successful! Welcome, ' + email);
-            // Redirect to dashboard (for later)
-            window.location.href = 'other/vendor-dashboard.html';
+            // Simple validation for login (in production, you'd check this with a database)
+            if (email === storedEmail && phone === storedPhone && password === storedPassword) {
+                alert('Login Successful!');
+                // Redirect to dashboard
+                window.location.href = 'vendor-dashboard.html';
+            } else {
+                alert('Invalid login credentials.');
+            }
         });
     </script>
 
